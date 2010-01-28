@@ -1,0 +1,66 @@
+Videodog 0.31
+
+
+Videodog is a command line tool, just based on a stock linux distro, with no need of special libraries, or graphic enviroment ( as xlib, imlib).
+The only special lib is jpeglib, present in most of systems, but you can work without it (see INSTALL).
+I've running it in an embedded uClinux+busybox installation, with native jpeglib ( compiled for uClibc), and its working fine !
+
+NOTE: Check out MOTION and ALPHABLEND
+
+
+You can use a simple config file, suited for the most common needs, or use the command line options. 
+To change the path, just edit the makefile. The default path is /etc/vd.conf.
+In the folder called "extra" you will find the gtkpnm, xputjpeg, gtk_cam and a small swap asm function, bgr2rgb.
+
+There is a man page. Just check it with man ./videodog.man or move to a proper location. Its not complete yet, so, I didn`t put it in the Makefile.
+
+*In a short:*
+Just grabs a frame from v4l device or set its picture defaults. 
+Useful for scripts, webcam scripts. No dependencies of any external libs.
+
+
+Read LICENSE for more details in copying and distribution.
+Read INSTALL for details on how to compile/install it.
+Read CHANGELOG for whats new
+There is a vd.conf as example configuration, for those who would like to use this feature.
+Compiling the effects causes no overhead or great executable size increase.
+
+
+Possible outputs: 
+	RAW frame (RGB) 
+	PNM frame  
+	JPEG frame
+	TARGA24 (tga) frame.
+	Double buffer loop capture or single frame with any format.
+
+
+Tested with:  
+	CPiA driver (webcam II parport)
+ 	Bttv driver ( bt 848 & 878 )
+ 	ov511 ( webcam III usb )
+	DLINK cam
+
+Notes: 
+ - 2.4.x kernel`s CPIA parport driver seems strange for me. Each capture is consuming almost 100% cpu !
+ - OV511 users: I`ve been receiving reports of VIDIOCMCAPTURE: invalid argument. Don`t know why is it giving this errors, but I can`t test more, because I dont onw such device. Please send reports, if possible.
+  
+  
+Thanks to :
+	I`ve removed all names from here due to the extreme numer of folks who have been helpful to send bug reports, enhancements, patches, suggestions, or even dropping a line to let me know how videodog was useful to them. Thank you all, and I hope that even with the not-so-constant releases, I can provide not the best, but a solid tool to, hopefully, solve your problems with video capture.
+	Many emails later, and almost 2 years, I`ve been informed that videodog has been running on StrongARM w/o any further mods, that it is the basis of some scientif work, and even being used as webcam capture program.
+	You folks have been very supportive, and this is what keeps me wanting to develop not only videodog, but more open solutions. It is not the best capture tool around, but I think this is why so many people have been using it: its a tool, not a program trying to show it is better than the user, or a ANSI C skill contest.
+	Best regards and thank you again.
+	
+
+
+
+Thanks for using videodog, please send any suggestion/bug report/complaints/rants to :
+
+
+Gleicon S. Moraes - 
+ [gleicon@terra.com.br]
+ http://planeta.terra.com.br/informatica/gleicon/
+
+
+
+

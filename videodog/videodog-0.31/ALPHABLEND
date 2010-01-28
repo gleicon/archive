@@ -1,0 +1,5 @@
+There is a code snippet inside contrib dir - working with gtk_cam, which tests a simple alphablend log inside the image.
+VideoDog isn't interfacing with it yet, due to lack of time/resources from my part to complete it, but you can see the results from gtk_cam.
+Remember, the entry point to implement such functions is always video.c:grab_loop();
+The main issue is the need of an efficient config file management, to add such features.
+

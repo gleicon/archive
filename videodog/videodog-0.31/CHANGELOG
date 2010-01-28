@@ -1,0 +1,111 @@
+videodog 0.31
+FIXED: 
+config filel reader ( I hope so)
+other input initialization issue
+
+
+videodog 0.30
+Version number upgraded to 0.30 due to TMTBR ( too much time between releases )
+
+ADDED: Experimental motion detection scheme. see motion.c, MOTION.
+       Alphablend code - to insert a watermark in every frame
+
+FIXED: extra/gtk_cam.c - little thread bits
+       timestamp-seq-channel name, to fix the file order
+       from now on, -m will only work with newest bttv drivers. the NTSC|PAL|SECAM changes are made with ioctl(VIDIOCSCHAN) and not with CSTUNER as before.
+NEEDED: Better config interface and a way to access all resources
+
+       
+videodog 0.23
+ADDED: small pdf file trying to explain about v4l and videodog
+
+FIXED: stupid bug in the RGB swap call
+       channel attribution mismatch in cycle channels function
+       moved v_flags into struct vd_video
+       set_channel & cycle_channel now, for every channel, set_picture() and set_mode() to prevent weird images.
+       fixed set_mode so a invalid or impossible mode will defaults to NTSC
+
+
+videodog 0.22
+
+ADDED: 	faster bgr24 swap function (x86 only)
+       	cycle input in each capture (set -i to -1)
+       	more code examples
+	more info about effects (see EFFECTS)
+		
+FIXED:  small bugs in the name format
+	updated man page
+	corrected misconception of some loop functions
+	ugly bug in the config parser
+	Compile without JPEGLib support ( thanks to John Sweeney )
+	The vd->channel bug ( thanks to everyone who reported it )
+
+MOVED:  the examples code to extra/
+
+
+videodog 0.21
+
+ADDED: 	gtk_cam.c, a small and simple gtk capture app. 
+       	config path option to the makefile
+       	man page
+	Implemented filenames as timestamp-sequence-input.format
+	Channel names to -s (probe option), reformatted output
+	
+FIXED: 	lots of little bugs, input channel change checking
+       	cleaned the help option. Well, ripped it off. -h just shows a simple banner with the compile time options. refer to the manpage to check out the help
+	Some frames missed the rgb24 swap - everything's ok now
+	Fixed the channel selection function
+	This was by far one of most massive rewrites and bugfixes version.
+	Some conceptual changes are on the way and I hope to do that rewrite and code cleaning ASAP
+
+
+videodog 0.20
+
+ADDED: "mode" directive in the config file ( how dumb a man can be ... ), a timestamp function with scaling and many text options, bumped version to 0.20, some tuneups in the file recording functions.
+FIXED: -h option that wasn't working, a memory leak in the read_conf function.
+
+
+videodog 0.14
+
+ADDED: - option to dump the image to stdout (no matter what format). Another viwer, gtkpnm, gtk-based pnm viewer (not required to build videodog).
+FIXED: (at least I tried to) another bug in channel changing w/ some bt848 cards
+DISABLED: the -DDEBUG flag. 
+
+
+videodog 0.13
+
+ADDED: Config file (see CONFIG_FILE for more info), new effects: mirroring, lowpass filter ( smoothing ), highpass filter (sharpening), mark_areas (object locator), TARGA image format for saving TGA 24 bits images, channel_threshold (effect), predator (effect);
+FIXED: bug who doesn`t allow input changing and non-jpeg compilations to work properly. this bug does affects the jpeg compile too, with the loop option. Some non closed file descriptors. Fixed another malloc/free bug. Commented the effects section ( sorry, the negative effect was turned on in the last release).
+MOVED: the command line options to a separate file to ease the config file implementation
+
+
+videodog 0.12
+
+FIXED: sobel and laplace convolutions, some slowness reported in channel changing. A bug who forced the channel to be set every time, even if the user doesn't specify it.
+ADDED: noise effect (salt), negative image effect
+
+
+videodog 0.11
+
+As I receive many mails asking about image processing with videodog, I put some rough functions to show how to hook the image and transform or process it. See EFFECTS and README for more info.
+This is the main improvement of this release, along with an install patch I got from Petter Reinholdtsen.
+I've included a simple xlib jpeg viewer, xputjpeg. See README
+BUGFIX: now the -w 1 capture works ok ( no more segfaults )
+
+videodog 0.10
+
+Another bug fix release, mostly due to tips sent by John D. Rowell from AppWatch.
+Command line options bugs, and such
+Corrected some segfault due to unproper command line handling, and added error msgs.
+
+
+videodog 0.09
+
+Its just a bug fix release, cleaned up some race conditions, introduced some compile time options. This fix an annoying bug in the loop about the rgb swap scheme.
+
+
+videodog 0.08
+
+This release splits the source code, implements multiple buffer capture (a capture loop), and includes some clean-ups. There are some command line options modifications.
+
+

@@ -1,0 +1,76 @@
+Effects I coded :
+ (see effects.c for more info )
+ 
+ . sobel transformation (works better in 8 bpp) edge detection
+ . laplace transformation (works better in 8 bpp) edge detection
+ . gamma correction to <value>
+ . set threshold to the image (funny effects in RGB24).
+ . salt and pepper noise
+ . negative image
+ . mirroring
+ . lowpass (smoothing)
+ . highpass (sharpening)
+ 
+
+ 
+Well, there is not much to say about them. I dont know if sobel and laplace are ok, I got parts of this code from the net, as I said before, just digging around.
+I hope them helps who wants to use videodog for other apps than webcam or security. 
+But I couldn`t make every vd user include them or use, so, they are there, but disabled.
+To enable is just a matter of uncoment the proper lines  in video.c, grab_one function or insert the proper sequence in grab_loop.
+Only the gamma correction effect has an initialization function, the gamma_lookup, to construct a lookup table, and improve the speed.
+Send me feedback, more effects code ( I am interested in border detection, contour, crazy transformations, and stuff).
+
+
+
+Tips on implementing your effect/processing function
+
+
+
+First, check out the template, and fill it with your processing. In this case, Its just looping through the image.
+You should check out the vd_video.w for the depth, and apply the right processing rule.
+Dont forget to add a prototype to effects.h. The code should stay in effects.c
+
+
+
+/* Template for a effect function. */
+
+
+void myeffect (struct vd_video *vd, ....) {  // The extra parameters are on your  own
+         unsigned long int a=0;
+
+         for (a=0; a < vd->grab_size; a=a+vd->w) { // loop through image, in ve->w steps
+         	MyImageProcessingAlgorithm(*vd->grab_data + a); // reach each RGB element
+		
+	}
+
+ }
+
+
+After that, reach the video.c file and place the call to your effect in the HOOK mark, near a 
+
+/* HOOK for effects */
+ 
+In this point, there will be a complete image in the buffer.
+The processing dynamic is the following:
+
+Loop through the buffer, stepping by w bytes each time ( w means the RGB size ).
+Do your calculation. 
+Done
+
+Things got a little scary when dealing with kernel processing, like sobel or laplace. But its not that difficult, just format your matrix and figure out how to reach the proper elements.
+
+
+
+Links:
+http://www.cee.hw.ac.uk/hipr/html/hipr_top.html
+http://www.ee.uwa.edu.au/~braunl/improv/
+http://www.efg2.com/Lab/Library/ImageProcessing/Algorithms.htm
+
+
+Thats it, Good luck.
+
+
+
+Gleicon
+
+	   

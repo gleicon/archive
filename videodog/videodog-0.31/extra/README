@@ -1,0 +1,26 @@
+VideoDog - extras
+
+These are little examples people always ask me.
+Usually they are rough and intended to show how does it works, and not the best way to apply certain libraries.
+Enjoy
+
+
+gtkpnm.c - load a pnm image and displays it. make gtkpnm
+gtk_cam.c - just open the video device and start video  make gtk_cam
+xputjpeg.c - load a jpeg image into XWindow. Pure xlib code, no gtk. make xputjpeb
+bgr2rgb.c - contains a small bgr24 to rgb24 swap function. no make entry
+sdlcap-v4l.c - SDL and V4L capture example. Also, it has a usefull subset of videodog v4l functions, easy to use.
+
+jpeg/ - examples on how to compress/uncompress jpeg files.
+
+Use make all to compile them.
+
+There are more code pieces I've uploaded to my website:
+
+http://planeta.terra.com.br/informatica/gleicon/code/index.html
+http://planeta.terra.com.br/informatica/gleicon/video4linux/videodog.html
+
+
+
+Gleicon S. Moraes - gleicon@terra.com.br
+

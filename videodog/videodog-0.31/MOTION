@@ -1,0 +1,11 @@
+This is the first motion detection release.
+Uncomment the -DMOTION in the Makefile, and when in loop capture, videodog will only save changing frames.
+The algorithm is explained into motion.c, and the approach is very simple.
+The entry point is inside video.c file, grab_loop function. Its very beta software, but have been working ok for me. 
+There are two functions:
+
+detect_motion - which only detects and returns an average changed pixel number, but keeps image as it were before analysis
+
+subtract_motion - which does the same, but returns a modified image, containing only the diff'ed pixels.
+
+

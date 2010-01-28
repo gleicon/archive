@@ -1,0 +1,41 @@
+The videodog config file
+
+I've decided to build my own parser because:
+
+a) dont need too much smartness, just get simple directives
+b) dont want to depend on external libraries. my goal is a simple capture program.
+
+So, the keywords are very intuitive, like the included vd.conf can prove.
+_FOR NOW_ (tm) videodog only looks for config file at /etc
+Please, report me the bugs you find.
+
+
+The current valid keywords are:
+
+device - sets the video device
+width, height, depth - the name says all
+output_format - can be raw, pnm, tga, jpg, lower case
+effectchain doesn`t work yet
+capture_type - says if its a loop or single capture
+file - if its a single frame capture, we need a file name or the stdout flag
+input_channel - defines 0, 1, 2, 3 ( the input channel )
+
+Time stamp functions:
+
+stamp = defines the stamp text, tags used for times are the same for strftime.
+if its null, empty, or doesn`t exist in the config file,  there will be no time stamp.
+st_x = the x position inside the image.
+st_y = the y position inside the image.
+st_scale_w = w scale. its a kind of zoom. if not defined, its equal 1
+st_scale_h = same as above, the h scale. not define it, automagically makes it 1.
+
+
+These are beta code yet. I use a standart 8x8 font as reference to calculate
+the font used, even for the scaling. Its not nice or happy as true type fonts, but remember: videodog is intended to not depend on extra libs for easy functionality.
+
+
+Comments and remarks are set by # directive.
+
+
+Enjoy
+

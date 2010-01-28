@@ -1,0 +1,23 @@
+videodog INSTALL:
+(if you are reading this, I suppose you have opened the tarball so...)
+
+After gunzip/untar, enter the videodog dir, and type make.
+There are a make install option, but is not mandatory, you can just copy the files to wherever you want (videodog, the executable, and vd.conf to the path specified in the Makefile. Default is /etc/vd.conf).
+
+Check out the Makefile for some compile time options, 
+like BENCH, to print benchmark in capture loop, 
+and HASJPEG to enable jpeglib support.
+Type make xputjpeg to test the xlib viewer, make gtkpnm to the pnm viewer and gtk_cam to the cam app.
+
+
+REMARKS:
+
+If you want to test and use the config file, just copy the vd.conf to /etc, edit it and its alright. Please, report any bug you found.
+To disable the jpeg support, edit the Makefile, look for the tag HASJPEG.
+To disable the timestamp code, the same, look for STAMP tag. 
+
+
+Gleicon 
+gleicon@terra.com.br
+
+

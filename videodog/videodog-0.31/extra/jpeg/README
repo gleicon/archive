@@ -1,0 +1,23 @@
+These are some jpeg lib usage examples.
+The main reason was: I needed to learn how to work with jpeglib, how to open
+a image and convert to another format.
+
+
+jdec asks for 2 parameters: image.jpeg and image.pnm ( converts to a pnm )
+jdec-line is another approach to decompression ( it saves a raw bin file )
+jcom is a example to compress a jpeg from a raw or pnm file.
+
+
+PNM explanation: well...there is no explanation, i dont know nothing about
+this image format..i just know that line to put before the raw image with P^
+( rgb image, 24 bits ) X, Y, etc ,etc
+
+
+
+
+Enjoy..
+
+
+
+Gleicon
+gleicon@terra.com.br

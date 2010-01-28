@@ -1,0 +1,110 @@
+.TH VideoDog 6 
+
+.SH VideoDog 
+
+VideoDog - capture and process video from a video4linux device. 
+
+.SH SYNOPSIS 
+
+.B videodog [-hxywdpucblmsnijyrifqtSXYWH] or config file
+
+
+.SH ARCH 
+
+Linux and v4l1.  
+
+.SH DESCRIPTION 
+
+VideoDog captures, process and deliver as fast as possible images from a video device. One of its goals is to provide a simple application, with no heavy dependencis on external libraries, as other do, and provide options suck JPEG compression, timestamp in the image and a hook for processing functions.
+VideoDog can be used as surveillance application, videoprocessing in realtime, and embedded systems.
+A simple stock linux distribution will work ok in conjunction with videodog, due to its independent nature. So, there are only the need to project resources for the capture and processing, and nothing more, like graphic enviroment and such.
+Another goal is the easy understanding of the video API, and this is acomplished by the modular code and auxiliar applications, as gtkpnm, xputjpeg and gtk_cam, which shows how to use video and images under XWindow. They are not required to run videodog.
+For more information on the filters or another features, please refer to the documents in the distribution.
+
+.SH OPTIONS 
+ 
+.TP  
+  Required:
+
+  x - width
+  y - height
+  w - depth ( in bytes )
+  d - device
+  p - pnm output (24 or 8 bits only )
+  t - targa output
+  r - raw output
+  f - filename (needed)
+  
+.TP
+  Optional:
+ 
+  i - Input (if its set to -1, cycle input in loop mode)
+  m - Mode <NTSC|PAL|SECAM>
+  j - jpeg output
+  u - Hue
+  c - Contrast
+  b - Brightness
+  l - Colour
+  s - show device report
+  n - no capture, just setup and exit clean
+  q - if set, toggle loop capture on 
+
+.TP
+  Stamp
+
+  S - stamp text (if it doesn`t exists, there will be no stamp)
+  X - stamp X coordinate inside the image
+  Y - stamp Y coordinate inside the image
+  W - stamp weight font scale (zoom)
+  H - stamp height font scale (zoom)
+     
+
+
+.SH USAGE EXAMPLES
+
+
+.TP
+ ./videodog (will look for /etc/vd.conf and starts smoothly)
+
+.TP
+ ./videodog -s -d /dev/video0 - query the device about settings.
+
+.TP
+ videodog -x 320 -y 240 -w 3 -d /dev/video0 -p -f lelel.pnm ;	cjpeg lelel.pnm > lelel.jpg
+
+.TP
+ videodog -x 640 -y 480 -w 3 -i 1 -m NTSC -d /dev/video -p -f out.pnm	- uses input 1 and NTSC mode to grab image
+
+.TP
+ videodog -s -d /dev/video0 -u 200 - set Hue == 200 and query the device
+
+.TP
+ videodog -x 320 -y 240 -w 3 -d /dev/video0 -j -f leee.jpg - uses the internal jpeg compressor ( aka jpeglib ).
+
+.TP
+ videodog -x 320 -y 240 -w 3 -d /dev/video0 -j -q	- loop capture at maximum possible rate. this will record in the current folder, lots of img-xx.ext, 
+
+.TP
+ videodog -x 320 -y 240 -w 3 -d /dev/video0 -j -f -	- dumps the image to stdout ( any format ) just change the filename by -	
+
+.TP
+ videodog -x 320 -y 240 -w 3 -d /dev/video0 -j -f +	- filename will be timestamp-sequence-input.fmt	
+
+.TP
+ videodog -x 640 -y 480 -w 3 -i i -1  -d /dev/video -j -f + -q		- cycle inputs and grab images as timestamp-seq-input
+
+.TP
+ videodog -x 320 -y 240 -w 3 -d /dev/video0 -j -f +    - image name will be timestamp-sequence.( any format ); sequence is needed due to loop capture ( more than 1 fps)
+						 
+.TP
+ videodog -x 320 -y 240 -w 3 -d /dev/video0 -j -f leee.jpg -S "oi %Y" -X 2 -Y 10	- generate an jpeg image called leee.jpg, with a stamp containing oi and the year, at the 2, 10 (x,y) 
+
+.TP
+ videodog -x 320 -y 240 -w 3 -d /dev/video0 -j -f leee.jpg -S "oi %Y" -X 2 -Y 10 -W 2 -H 2		- same as above, but scale the fonts by a factor of 2 ( experimental )
+
+.B NOTE: inside the stamp text, you should use the same simbols than strftime. Check out "man strftime" to see all the possibilities.
+
+.SH AUTHOR 
+
+Gleicon S. Moraes - gleicon@terra.com.br 
+

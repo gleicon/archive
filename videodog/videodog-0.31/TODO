@@ -1,0 +1,9 @@
+Todo list: (30/04/03)
+
+- Redo the configure file parser.
+- Implement capture in time intervals  (n times/sec)
+- Sync the input change and the capture delay
+- Add more options to the config file
+- SIGHUP to reload config file
+
+- future plans: independent video capture layer ( I hope to port it to netbsd ), v4l2 module and rewrite

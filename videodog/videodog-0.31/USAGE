@@ -1,0 +1,112 @@
+- Command line options:
+
+
+Options you need:
+ 
+  h - help
+  x - width
+  y - height
+  w - depth ( in bytes )
+  d - device
+  p - pnm output (24 or 8 bits only )
+  t - targa output
+  r - raw output
+  f - filename (needed: - means stdout, + means timestamp-sequence-input)
+  
+  Optional:
+ 
+  i - Input (if its set to -1, cycle input in loop mode)
+  m - Mode <NTSC|PAL|SECAM>
+  j - jpeg output
+  u - Hue
+  c - Contrast
+  b - Brightness
+  l - Colour
+  s - show device report
+  n - no capture, just setup and exit clean
+  q - if set, toggle loop capture on 
+ 
+ Stamp
+
+ S - stamp text (if it doesn`t exists, there will be no stamp)
+ X - stamp X coordinate inside the image
+ Y - stamp Y coordinate inside the image
+ W - stamp weight font scale (zoom)
+ H - stamp height font scale (zoom)
+ 
+ 
+- Optional effects:
+  Note: I had no formal education in image processing, so, 
+        much of this are an effort to learn more about his topic and help 
+	those who mailed me asking about how to implement these kind of 
+	functions in videodog. see video.c and effects.c to more details.
+  	If you got something about this subject, please drop me a line.
+ 
+I left the effects remarked in video.c, grab_one function, i
+because isn`t everybody who needs it. In a future release, there will be an 
+interface to it in the config file.
+Effects are detailed in the EFFECTS file. 
+They are implemented in ANSI C, with no asm optimization, so, should work well in any arch.
+
+   sobel transformation (works better in 8 bpp)
+   laplace transformation (works better in 8 bpp)
+   gamma correction to <value>
+   set threshold to the image (funny effects in RGB24).
+   and more effects ( see CHANGELOG and EFFECTS )
+
+   
+  For Now these effects are enabled only in the single frame capture. Its easy to enable them in the loop, but seems not interesting.
+  They are not included in the command line options too, because are experimental and educational code, so, enable them for yourself in video.c, inside the grab_one function. see EFFECTS for reference.
+
+
+
+- Command line examples:
+ 	
+	
+	./videodog (will look for /etc/vd.conf and starts smoothly)
+	
+	./videodog -s -d /dev/video0 
+ 			- query the device about settings.
+ 
+ 
+ 	./videodog -x 320 -y 240 -w 3 -d /dev/video0 -p -f lelel.pnm ; 
+						cjpeg lelel.pnm > lelel.jpg
+ 
+ 	./videodog -x 640 -y 480 -w 3 -i 1 -m NTSC -d /dev/video -p -f out.pnm
+ 			- uses input 1 and NTSC mode to grab image
+ 
+ 	./videodog -s -d /dev/video0 -u 200 
+ 			- set Hue == 200 and query the device
+ 
+	./videodog -x 320 -y 240 -w 3 -d /dev/video0 -j -f leee.jpg 
+			- uses the internal jpeg compressor ( aka jpeglib ).
+		 	just edit the Makefile to disable it
+	
+	./videodog -x 320 -y 240 -w 3 -d /dev/video0 -j -q
+			- loop capture at maximum possible rate.
+			this will record in the current folder, lots of 
+			img-xx.ext, where xx is a number, and ext is 
+			one of {raw, pnm, jpg}.
+
+	./videodog -x 320 -y 240 -w 3 -d /dev/video0 -j -f -
+			- dumps the image to stdout ( any format )
+			 just change the filename by -
+	
+	./videodog -x 320 -y 240 -w 3 -d /dev/video0 -j -f +
+			- image name will be timestamp-sequence-input.( any format )
+			 sequence is needed due to loop capture ( more than 1 fps)
+	
+	./videodog -x 320 -y 240 -w 3 -d /dev/video0 -j -f leee.jpg -S "oi %Y" -X 2 -Y 10
+			- generate an jpeg image called leee.jpg, with a stamp containing oi and the year, at the 2, 10 coordinates.
+	
+	./videodog -x 320 -y 240 -w 3 -d /dev/video0 -j -f leee.jpg -S "oi %Y" -X 2 -Y 10 -W 2 -H 2
+			- same as above, but scale the fonts by a factor of 2 ( experimental )
+ 	
+	./videodog -x 640 -y 480 -w 3 -i -1  -d /dev/video -j -f + -q
+ 			- cycle inputs and grab images as timestamp-seq-input in a loop
+
+NOTE: inside the stamp text, you should use the same simbols than strftime. Check out "man strftime" to see all the possibilities.
+
+		
+	
+
